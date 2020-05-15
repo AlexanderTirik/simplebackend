@@ -1,6 +1,5 @@
 const responseMiddleware = (req, res, next) => {
   if (res.err) {
-    res.statusCode = 400
     res.send(res.err)
   } else {
     res.statusCode = 200
