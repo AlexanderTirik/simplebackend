@@ -57,8 +57,9 @@ router.delete(
   "/:id",
   (req, res, next) => {
     const id = req.params.id
+    const fighter = FighterService.getFighter(id)
     FighterService.deleteFighter(id)
-    res.data = "Success"
+    res.data = fighter
     next()
   },
   responseMiddleware

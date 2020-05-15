@@ -61,8 +61,9 @@ router.delete(
   "/:id",
   (req, res, next) => {
     const id = req.params.id
+    const user = UserService.getUser(id)
     UserService.deleteUser(id)
-    res.data = "Success"
+    res.data = user
     next()
   },
   responseMiddleware
