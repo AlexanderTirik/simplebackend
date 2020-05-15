@@ -6,11 +6,7 @@ class UserService {
   }
 
   addUser(user) {
-    try {
-      UserRepository.create(user)
-    } catch (err) {
-      return err
-    }
+    return UserRepository.create(user)
   }
 
   getUser(id) {
@@ -34,7 +30,7 @@ class UserService {
 
   updateUser(id, dataToUpdate) {
     if (this.isExistUser(id)) {
-      UserRepository.update(id, dataToUpdate)
+      return UserRepository.update(id, dataToUpdate)
     } else {
       const err = {
         error: true,

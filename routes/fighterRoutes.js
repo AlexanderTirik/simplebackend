@@ -40,10 +40,10 @@ router.post(
   "/",
   createFighterValid,
   (req, res, next) => {
-    FighterService.addFighter(req.body)
+    const newFighter = FighterService.addFighter(req.body)
     res.data = {
       error: false,
-      message: "Success",
+      message: newFighter,
     }
     next()
   },
@@ -55,10 +55,10 @@ router.put(
   (req, res, next) => {
     const id = req.params.id
     const dataToUpdate = req.body
-    FighterService.updateFighter(id, dataToUpdate)
+    const updatedFighter = FighterService.updateFighter(id, dataToUpdate)
     res.data = {
       error: false,
-      message: "Success",
+      message: updatedFighter,
     }
     next()
   },

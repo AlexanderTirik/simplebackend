@@ -6,11 +6,7 @@ class FighterService {
   }
 
   addFighter(fighter) {
-    try {
-      FighterRepository.create(fighter)
-    } catch (err) {
-      return err
-    }
+    return FighterRepository.create(fighter)
   }
 
   getFighter(id) {
@@ -34,7 +30,7 @@ class FighterService {
 
   updateFighter(id, dataToUpdate) {
     if (this.isExistFighter(id)) {
-      FighterRepository.update(id, dataToUpdate)
+      return FighterRepository.update(id, dataToUpdate)
     } else {
       const err = {
         error: true,

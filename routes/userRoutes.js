@@ -42,10 +42,10 @@ router.post(
   "/",
   createUserValid,
   (req, res, next) => {
-    UserService.addUser(req.body)
+    const newUser = UserService.addUser(req.body)
     res.data = {
       error: false,
-      message: "Success",
+      message: newUser,
     }
 
     next()
@@ -59,10 +59,11 @@ router.put(
   (req, res, next) => {
     const id = req.params.id
     const dataToUpdate = req.body
-    UserService.updateUser(id, dataToUpdate)
+    const updatedUser = UserService.updateUser(id, dataToUpdate)
+    const user = UserService.getUser(id)
     res.data = {
       error: false,
-      message: "Success",
+      message: updatedUser,
     }
     next()
   },
