@@ -27,7 +27,7 @@ const createValidate = (object, schema) => {
   if (notFound.length > 0) {
     const err = {
       error: true,
-      message: `${notFound[0]} not found`,
+      message: `${notFound[0]} is invalid`,
     }
     throw err
   }
@@ -48,7 +48,7 @@ const updateValidate = (object, schema) => {
   if (notFound.length > 0) {
     const err = {
       error: true,
-      message: `${notFound[0]} not found`,
+      message: `${notFound[0]} is invalid`,
     }
     throw err
   }

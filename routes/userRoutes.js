@@ -15,10 +15,7 @@ router.get(
   "/",
   (req, res, next) => {
     const allUsers = UserService.getAllUsers()
-    res.data = {
-      error: false,
-      message: allUsers,
-    }
+    res.data = allUsers
     next()
   },
   responseMiddleware
@@ -29,10 +26,7 @@ router.get(
   (req, res, next) => {
     const id = req.params.id
     const user = UserService.getUser(id)
-    res.data = {
-      error: false,
-      message: user,
-    }
+    res.data = user
     next()
   },
   responseMiddleware
@@ -43,11 +37,7 @@ router.post(
   createUserValid,
   (req, res, next) => {
     const newUser = UserService.addUser(req.body)
-    res.data = {
-      error: false,
-      message: newUser,
-    }
-
+    res.data = newUser
     next()
   },
   responseMiddleware
@@ -61,10 +51,7 @@ router.put(
     const dataToUpdate = req.body
     const updatedUser = UserService.updateUser(id, dataToUpdate)
     const user = UserService.getUser(id)
-    res.data = {
-      error: false,
-      message: updatedUser,
-    }
+    res.data = updatedUser
     next()
   },
   responseMiddleware
@@ -75,10 +62,7 @@ router.delete(
   (req, res, next) => {
     const id = req.params.id
     UserService.deleteUser(id)
-    res.data = {
-      error: false,
-      message: "Success",
-    }
+    res.data = "Success"
     next()
   },
   responseMiddleware

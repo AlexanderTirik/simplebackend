@@ -13,10 +13,7 @@ router.get(
   "/",
   (req, res, next) => {
     const allFighters = FighterService.getAllFighters()
-    res.data = {
-      error: false,
-      message: allFighters,
-    }
+    res.data = allFighters
     next()
   },
   responseMiddleware
@@ -27,10 +24,7 @@ router.get(
   (req, res, next) => {
     const id = req.params.id
     const fighter = FighterService.getFighter(id)
-    res.data = {
-      error: false,
-      message: fighter,
-    }
+    res.data = fighter
     next()
   },
   responseMiddleware
@@ -41,10 +35,7 @@ router.post(
   createFighterValid,
   (req, res, next) => {
     const newFighter = FighterService.addFighter(req.body)
-    res.data = {
-      error: false,
-      message: newFighter,
-    }
+    res.data = newFighter
     next()
   },
   responseMiddleware
@@ -56,10 +47,7 @@ router.put(
     const id = req.params.id
     const dataToUpdate = req.body
     const updatedFighter = FighterService.updateFighter(id, dataToUpdate)
-    res.data = {
-      error: false,
-      message: updatedFighter,
-    }
+    res.data = updatedFighter
     next()
   },
   responseMiddleware
@@ -70,10 +58,7 @@ router.delete(
   (req, res, next) => {
     const id = req.params.id
     FighterService.deleteFighter(id)
-    res.data = {
-      error: false,
-      message: "Success",
-    }
+    res.data = "Success"
     next()
   },
   responseMiddleware
