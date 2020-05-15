@@ -1,10 +1,84 @@
-const { Router } = require('express');
-const FighterService = require('../services/fighterService');
-const { responseMiddleware } = require('../middlewares/response.middleware');
-const { createFighterValid, updateFighterValid } = require('../middlewares/fighter.validation.middleware');
+const { Router } = require("express")
+const FighterService = require("../services/fighterService")
+const { responseMiddleware } = require("../middlewares/response.middleware")
+const { errorHandlerMiddleware} = require("../middlewares/errorHadler.middleware")
+const {
+  createFighterValid,
+  updateFighterValid,
+} = require("../middlewares/fighter.validation.middleware")
 
-const router = Router();
+const router = Router()
 
-// TODO: Implement route controllers for fighter
+router.get(
+  "/",
+  (req, res, next) => {
+    const allFighters = FighterService.getAllFighters()
+    res.data = {
+      error: false,
+      message: allFighters,
+    }
+    next()
+  },
+  responseMiddleware
+)
 
-module.exports = router;
+router.get(
+  "/:id",
+  (req, res, next) => {
+    const id = req.params.id
+    const fighter = FighterService.getFighter(id)
+    res.data = {
+      error: false,
+      message: fighter,
+    }
+    next()
+  },
+  responseMiddleware
+)
+
+router.post(
+  "/",
+  createFighterValid,
+  (req, res, next) => {
+    FighterService.addFighter(req.body)
+    res.data = {
+      error: false,
+      message: "Success",
+    }
+    next()
+  },
+  responseMiddleware
+)
+
+router.put(
+  "/:id", updateFighterValid,
+  (req, res, next) => {
+    const id = req.params.id
+    const dataToUpdate = req.body
+    FighterService.updateFighter(id, dataToUpdate)
+    res.data = {
+      error: false,
+      message: "Success",
+    }
+    next()
+  },
+  responseMiddleware
+)
+
+router.delete(
+  "/:id",
+  (req, res, next) => {
+    const id = req.params.id
+    FighterService.deleteFighter(id)
+    res.data = {
+      error: false,
+      message: "Success",
+    }
+    next()
+  },
+  responseMiddleware
+)
+
+router.use(errorHandlerMiddleware, responseMiddleware)
+
+module.exports = router
