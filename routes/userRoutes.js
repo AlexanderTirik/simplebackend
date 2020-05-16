@@ -50,7 +50,6 @@ router.put(
     const id = req.params.id
     const dataToUpdate = req.body
     const updatedUser = UserService.updateUser(id, dataToUpdate)
-    const user = UserService.getUser(id)
     res.data = updatedUser
     next()
   },
